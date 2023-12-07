@@ -66,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
                     sharedPreferencesManager.setStudentId(data.getString("student_id"));
                     sharedPreferencesManager.setFirstName(data.getString("first_name"));
                     sharedPreferencesManager.setLastName(data.getString("last_name"));
+                    sharedPreferencesManager.setUserId(data.getString("id"));
                     Intent intent = new Intent(this, MainActivity.class);
                     startActivity(intent);
                     finish();

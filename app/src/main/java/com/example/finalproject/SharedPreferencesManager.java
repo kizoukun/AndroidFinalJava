@@ -10,6 +10,7 @@ public class SharedPreferencesManager {
     private static final String KEY_FIRST_NAME = "firstName";
     private static final String KEY_LAST_NAME = "lastName";
     private static final String KEY_EMAIL = "email";
+    private static final String KEY_USER_ID = "userId";
 
     private final SharedPreferences preferences;
 
@@ -17,13 +18,14 @@ public class SharedPreferencesManager {
         preferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
     }
 
-    public void saveUserDetails(boolean authStatus, String studentId, String firstName, String lastName, String email) {
+    public void saveUserDetails(boolean authStatus, String userId, String studentId, String firstName, String lastName, String email) {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean(KEY_AUTH_STATUS, authStatus);
         editor.putString(KEY_STUDENT_ID, studentId);
         editor.putString(KEY_FIRST_NAME, firstName);
         editor.putString(KEY_LAST_NAME, lastName);
         editor.putString(KEY_EMAIL, email);
+        editor.putString(KEY_USER_ID, userId);
         editor.apply();
     }
 
@@ -45,6 +47,10 @@ public class SharedPreferencesManager {
 
     public String getEmail() {
         return preferences.getString(KEY_EMAIL, null);
+    }
+
+    public String getUserId() {
+        return preferences.getString(KEY_USER_ID, null);
     }
 
     public void setIsLoggedIn(boolean isLoggedIn) {
@@ -74,6 +80,12 @@ public class SharedPreferencesManager {
     public void setEmail(String email) {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(KEY_EMAIL, email);
+        editor.apply();
+    }
+
+    public void setUserId(String userId) {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(KEY_USER_ID, userId);
         editor.apply();
     }
 

@@ -47,6 +47,36 @@ public class SharedPreferencesManager {
         return preferences.getString(KEY_EMAIL, null);
     }
 
+    public void setIsLoggedIn(boolean isLoggedIn) {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(KEY_AUTH_STATUS, isLoggedIn);
+        editor.apply();
+    }
+
+    public void setStudentId(String studentId) {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(KEY_STUDENT_ID, studentId);
+        editor.apply();
+    }
+
+    public void setFirstName(String firstName) {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(KEY_FIRST_NAME, firstName);
+        editor.apply();
+    }
+
+    public void setLastName(String lastName) {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(KEY_LAST_NAME, lastName);
+        editor.apply();
+    }
+
+    public void setEmail(String email) {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(KEY_EMAIL, email);
+        editor.apply();
+    }
+
     public void clearUserData() {
         SharedPreferences.Editor editor = preferences.edit();
         editor.remove(KEY_AUTH_STATUS);

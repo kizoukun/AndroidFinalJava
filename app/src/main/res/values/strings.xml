@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">finalproject</string>
+    <string name="register">Register to PUConsultant</string>
+    <string name="registerButton">Register</string>
+    <string name="password">Enter Password</string>
+    <string name="email">Enter Email</string>
+    <string name="registerFirstName">Enter First Name</string>
+    <string name="registerLastName">Enter Last Name</string>
+    <string name="registerStudentId">Enter Student ID</string>
+    <string name="loginTitle">Login to PUConsultant</string>
+    <string name="loginButton">Login</string>
+</resources>

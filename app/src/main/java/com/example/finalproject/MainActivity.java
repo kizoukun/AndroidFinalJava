@@ -59,13 +59,14 @@ public class MainActivity extends AppCompatActivity {
                     String receiverFirstName = chat.getString("receiver_first_name");
                     String receiverLastName = chat.getString("receiver_last_name");
                     String receiverName = receiverFirstName + " " + receiverLastName;
+                    String receiverId = chat.getString("receiver_id");
                     String message = "";
                     String lastMessageSender = chat.getString("last_message_sender");
                     if(lastMessageSender.equals(sharedPreferencesManager.getUserId())) {
                         message = "You: ";
                     }
                     message += chat.getString("last_message");
-                    addChat("1", receiverName, message);
+                    addChat(sharedPreferencesManager.getUserId(), receiverId,receiverName, message);
                 }
 
             } catch (JSONException e) {
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void addChat(String chatId, String receiverName, String lastMessage) {
+    public void addChat(String senderId, String receiverId, String receiverName, String lastMessage) {
         LinearLayout linearLayout = findViewById(R.id.chatList);
 
         LinearLayout newChat = new LinearLayout(this);
@@ -101,6 +102,15 @@ public class MainActivity extends AppCompatActivity {
 
         newChat.addView(receiver);
         newChat.addView(message);
+
+        newChat.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MessageActivity.class);
+            intent.putExtra("senderId", senderId);
+            intent.putExtra("receiverId", receiverId);
+            intent.putExtra("receiverName", receiverName);
+            startActivity(intent);
+            finish();
+        });
 
         linearLayout.addView(newChat);
     }

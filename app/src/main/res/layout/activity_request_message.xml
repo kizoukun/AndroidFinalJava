@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity=""
-    tools:context=".LoginActivity">
+    tools:context=".RequestMessageActivity">
 
     <TextView
         android:layout_width="wrap_content"

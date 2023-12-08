@@ -11,6 +11,7 @@ public class SharedPreferencesManager {
     private static final String KEY_LAST_NAME = "lastName";
     private static final String KEY_EMAIL = "email";
     private static final String KEY_USER_ID = "userId";
+    private static final String KEY_USER_ROLE = "userRole";
 
     private final SharedPreferences preferences;
 
@@ -53,6 +54,10 @@ public class SharedPreferencesManager {
         return preferences.getString(KEY_USER_ID, null);
     }
 
+    public String getUserRole() {
+        return preferences.getString(KEY_USER_ROLE, null);
+    }
+
     public void setIsLoggedIn(boolean isLoggedIn) {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean(KEY_AUTH_STATUS, isLoggedIn);
@@ -89,6 +94,12 @@ public class SharedPreferencesManager {
         editor.apply();
     }
 
+    public void setUserRole(String userRole) {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(KEY_USER_ROLE, userRole);
+        editor.apply();
+    }
+
     public void clearUserData() {
         SharedPreferences.Editor editor = preferences.edit();
         editor.remove(KEY_AUTH_STATUS);
@@ -96,6 +107,8 @@ public class SharedPreferencesManager {
         editor.remove(KEY_FIRST_NAME);
         editor.remove(KEY_LAST_NAME);
         editor.remove(KEY_EMAIL);
+        editor.remove(KEY_USER_ID);
+        editor.remove(KEY_USER_ROLE);
         editor.apply();
     }
 }

@@ -102,7 +102,7 @@ public class MessageActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }, error -> System.out.println("Failed to get messages"));
+        }, error -> Toast.makeText(this, "Failed to get chat list", Toast.LENGTH_SHORT).show());
         queue.add(request);
     }
 
@@ -111,7 +111,6 @@ public class MessageActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
         StringRequest request = new StringRequest(Request.Method.POST, url, response -> {
             try {
-                System.out.println(response);
                 JSONObject jsonObject = new JSONObject(response);
                 boolean isSuccess = jsonObject.getBoolean("success");
                 String message = jsonObject.getString("message");

@@ -7,18 +7,12 @@
     android:gravity=""
     tools:context=".LoginActivity">
 
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Logout"
-        android:id="@+id/logoutBtn"
-    />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Request Lecturer"
-        android:id="@+id/requestMessageBtn"
+        android:text="Lecturer List"
+        android:textSize="30sp"
+        android:layout_gravity="center"
     />
 
     <ScrollView
@@ -30,15 +24,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/chatList"
+            android:id="@+id/lecturers"
             android:orientation="vertical">
 
         </LinearLayout>
     </ScrollView>
-
-
-
-
-
-
 </LinearLayout>

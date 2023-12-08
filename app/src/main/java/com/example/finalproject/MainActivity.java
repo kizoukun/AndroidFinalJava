@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
@@ -42,6 +43,13 @@ public class MainActivity extends AppCompatActivity {
             finish();
         });
 
+        Button requestMessage = findViewById(R.id.requestMessageBtn);
+        requestMessage.setOnClickListener(v -> {
+            Intent intent = new Intent(this, RequestMessageActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
         String url = BASE_URL + "/list-chat.php?user=" + sharedPreferencesManager.getUserId();
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
         StringRequest stringRequest = new StringRequest(url, response -> {
@@ -72,9 +80,7 @@ public class MainActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }, error -> {
-            System.out.println(error);
-        });
+        }, error -> Toast.makeText(this, "Failed to get chat list", Toast.LENGTH_SHORT).show());
         queue.add(stringRequest);
 
 

@@ -24,6 +24,8 @@
             android:exported="false" />
         <activity android:name=".RequestMessageActivity"
             android:exported="false"/>
+        <activity android:name=".ListRequestsActivity"
+            android:exported="false"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">

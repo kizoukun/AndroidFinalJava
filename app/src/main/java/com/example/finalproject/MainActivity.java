@@ -44,11 +44,20 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Button requestMessage = findViewById(R.id.requestMessageBtn);
-        requestMessage.setOnClickListener(v -> {
-            Intent intent = new Intent(this, RequestMessageActivity.class);
-            startActivity(intent);
-            finish();
-        });
+        if(sharedPreferencesManager.getUserRole() != null && sharedPreferencesManager.getUserRole().equalsIgnoreCase("lecturer")) {
+            requestMessage.setText("List Requests");
+            requestMessage.setOnClickListener(v -> {
+                Intent intent = new Intent(this, ListRequestsActivity.class);
+                startActivity(intent);
+                finish();
+            });
+        } else {
+            requestMessage.setOnClickListener(v -> {
+                Intent intent = new Intent(this, RequestMessageActivity.class);
+                startActivity(intent);
+                finish();
+            });
+        }
 
         String url = BASE_URL + "/list-chat.php?user=" + sharedPreferencesManager.getUserId();
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());

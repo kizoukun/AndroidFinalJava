@@ -3,6 +3,10 @@ package com.example.finalproject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -19,7 +23,7 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String BASE_URL = "http://192.168.1.9/final";
+    public static final String BASE_URL = "http://172.20.10.3/android";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        Button logout = findViewById(R.id.logoutBtn);
+        TextView logout = findViewById(R.id.logoutBtn);
         logout.setOnClickListener(v -> {
             sharedPreferencesManager.setIsLoggedIn(false);
             sharedPreferencesManager.clearUserData();
@@ -43,9 +47,9 @@ public class MainActivity extends AppCompatActivity {
             finish();
         });
 
-        Button requestMessage = findViewById(R.id.requestMessageBtn);
+        TextView requestMessage = findViewById(R.id.requestMessageBtn);
         if(sharedPreferencesManager.getUserRole() != null && sharedPreferencesManager.getUserRole().equalsIgnoreCase("lecturer")) {
-            requestMessage.setText("List Requests");
+            requestMessage.setText("Requests");
             requestMessage.setOnClickListener(v -> {
                 Intent intent = new Intent(this, ListRequestsActivity.class);
                 startActivity(intent);
@@ -84,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     message += chat.getString("last_message");
                     addChat(sharedPreferencesManager.getUserId(), receiverId,receiverName, message);
+                    addChat(sharedPreferencesManager.getUserId(), receiverId,receiverName, message);
                 }
 
             } catch (JSONException e) {
@@ -101,19 +106,33 @@ public class MainActivity extends AppCompatActivity {
 
         LinearLayout newChat = new LinearLayout(this);
         newChat.setOrientation(LinearLayout.VERTICAL);
-        newChat.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        GradientDrawable shape = new GradientDrawable();
+        shape.setShape(GradientDrawable.RECTANGLE);
+        shape.setCornerRadius(16);
+        shape.setColor(Color.parseColor("#ffffff"));
+        newChat.setPadding(20, 20, 20, 20);
+        newChat.setBackground(shape);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        params.setMargins(0, 20, 0, 0);
+        newChat.setLayoutParams(params);
 
         TextView receiver = new TextView(this);
         receiver.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT));
         receiver.setText(receiverName);
+        receiver.setTypeface(null, Typeface.BOLD);
+        receiver.setTextSize(20);
 
         TextView message = new TextView(this);
         message.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT));
         message.setText(lastMessage);
+        message.setPadding(30, 10, 0, 0);
 
         newChat.addView(receiver);
         newChat.addView(message);

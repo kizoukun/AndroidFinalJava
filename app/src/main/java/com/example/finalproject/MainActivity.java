@@ -47,6 +47,13 @@ public class MainActivity extends AppCompatActivity {
             finish();
         });
 
+        Button demiAiBtn = findViewById(R.id.demiAiBtn);
+        demiAiBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(this, DemiAiActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
         TextView requestMessage = findViewById(R.id.requestMessageBtn);
         if(sharedPreferencesManager.getUserRole() != null && sharedPreferencesManager.getUserRole().equalsIgnoreCase("lecturer")) {
             requestMessage.setText("Requests");

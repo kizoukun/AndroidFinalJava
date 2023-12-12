@@ -1,12 +1,18 @@
 package com.example.finalproject;
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.LinearLayoutCompat;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -26,6 +32,12 @@ public class ListRequestsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_requests);
+        TextView messagePage = findViewById(R.id.messagePage);
+        messagePage.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        });
         getRequests();
     }
 
@@ -63,18 +75,61 @@ public class ListRequestsActivity extends AppCompatActivity {
         LinearLayout requestList = findViewById(R.id.requests);
         LinearLayout request = new LinearLayout(this);
         request.setOrientation(LinearLayout.VERTICAL);
+
+        GradientDrawable shape = new GradientDrawable();
+        shape.setShape(GradientDrawable.RECTANGLE);
+        shape.setCornerRadius(16);
+        shape.setColor(Color.parseColor("#ffffff"));
+        request.setPadding(20, 20, 20, 20);
+        request.setBackground(shape);
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        params.setMargins(0, 20, 0, 0);
+        request.setLayoutParams(params);
+
         TextView studentNameTextView = new TextView(this);
         TextView statusTextView = new TextView(this);
         studentNameTextView.setText(studentName);
+        studentNameTextView.setTypeface(null, Typeface.BOLD);
         statusTextView.setText(status);
         request.addView(studentNameTextView);
         request.addView(statusTextView);
         LinearLayout acceptReject = new LinearLayout(this);
         acceptReject.setOrientation(LinearLayout.HORIZONTAL);
+
         Button acceptBtn = new Button(this);
         acceptBtn.setText("Accept");
+        acceptBtn.setTextColor(Color.parseColor("#ffffff"));
+        GradientDrawable shaped = new GradientDrawable();
+        shaped.setShape(GradientDrawable.RECTANGLE);
+        shaped.setCornerRadius(64);
+        shaped.setColor(Color.parseColor("#4DB878"));
+        acceptBtn.setBackground(shaped);
+
+        LinearLayoutCompat.LayoutParams layoutParams = new LinearLayoutCompat.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        );
+
+        layoutParams.setMargins(0, 0, 30, 0 );
+        acceptBtn.setLayoutParams(layoutParams);
+
+
+
         Button rejectBtn = new Button(this);
         rejectBtn.setText("Reject");
+        rejectBtn.setTextColor(Color.parseColor("#ffffff"));
+        GradientDrawable shapee = new GradientDrawable();
+        shapee.setShape(GradientDrawable.RECTANGLE);
+        shapee.setCornerRadius(64);
+        shapee.setColor(Color.parseColor("#B84D4D")); // Set the same color as the background
+        rejectBtn.setBackground(shapee);
+
+
+
         acceptBtn.setOnClickListener(v -> {
             changeStatus(requestId, "ACCEPTED", studentId);
         });

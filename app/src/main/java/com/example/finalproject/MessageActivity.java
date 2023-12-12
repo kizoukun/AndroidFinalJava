@@ -1,6 +1,8 @@
 package com.example.finalproject;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.widget.Button;
@@ -62,16 +64,32 @@ public class MessageActivity extends AppCompatActivity {
 
     public void addMessage(boolean right, String message) {
         LinearLayout messageContainer = findViewById(R.id.chatList);
+        LinearLayout messageRow = new LinearLayout(this);
         TextView messageTextView = new TextView(this);
         messageTextView.setText(message);
         messageTextView.setTextSize(20);
+        GradientDrawable shape = new GradientDrawable();
+        shape.setShape(GradientDrawable.RECTANGLE);
         if(right) {
-            messageTextView.setGravity(Gravity.END);
+            shape.setCornerRadii(new float[] {64, 64, 64, 64, 0, 0, 64, 64});
+            shape.setColor(Color.parseColor("#B7EEFF"));
+            messageRow.setGravity(Gravity.END);
         } else {
-            messageTextView.setGravity(Gravity.START);
+            shape.setCornerRadii(new float[] {64, 64, 64, 64, 64, 64, 0, 0});
+            shape.setColor(Color.parseColor("#ffffff"));
+            messageRow.setGravity(Gravity.START);
         }
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        params.setMargins(20, 20, 20, 20);
+        messageTextView.setPadding(30, 30, 30, 30);
+        messageTextView.setLayoutParams(params);
+        messageTextView.setBackground(shape);
 
-        messageContainer.addView(messageTextView);
+        messageRow.addView(messageTextView);
+        messageContainer.addView(messageRow);
     }
 
     public void clearMessages() {

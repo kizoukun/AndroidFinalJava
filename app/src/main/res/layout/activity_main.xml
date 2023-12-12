@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:text="SIGN OUT"
             android:backgroundTint="#4D9EB8"
+            android:id="@+id/logoutBtn"
         />
     </LinearLayout>
 
@@ -46,7 +47,7 @@
             android:textSize="30dp"
             android:textStyle="bold"
             android:text="Message"
-            android:id="@+id/logoutBtn" />
+            android:id="@+id/messagePage" />
 
         <TextView
             android:layout_width="0dp"

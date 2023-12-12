@@ -1,7 +1,11 @@
 package com.example.finalproject;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -64,17 +68,49 @@ public class RequestMessageActivity extends AppCompatActivity {
     public void addLecturer(String lecturerId, String lecturerName) {
         LinearLayout lecturerList = findViewById(R.id.lecturers);
         LinearLayout lecturer = new LinearLayout(this);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        params.setMargins(0, 0, 0, 20);
         lecturer.setOrientation(LinearLayout.HORIZONTAL);
+        GradientDrawable shape = new GradientDrawable();
+        shape.setShape(GradientDrawable.RECTANGLE);
+        shape.setCornerRadius(16);
+        shape.setColor(Color.parseColor("#ffffff"));
+        lecturer.setPadding(20, 20, 20, 20);
+        lecturer.setBackground(shape);
 
         TextView lecturerNameTextView = new TextView(this);
         lecturerNameTextView.setText(lecturerName);
+        lecturerNameTextView.setTypeface(null, Typeface.BOLD);
+        lecturerNameTextView.setTextSize(24);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                0,
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                7.0f
+        );
+        layoutParams.setMargins(0, 0, 20, 0);
+        lecturerNameTextView.setLayoutParams(layoutParams);
         lecturer.addView(lecturerNameTextView);
 
         Button requestBtn = new Button(this);
         requestBtn.setText("Request");
+        requestBtn.setTextColor(Color.parseColor("#ffffff"));
+        GradientDrawable shaped = new GradientDrawable();
+        shaped.setShape(GradientDrawable.RECTANGLE);
+        shaped.setCornerRadii(new float[] {64, 64, 64, 64, 64, 64, 64, 64});
+        shaped.setColor(Color.parseColor("#4DB878"));
+        requestBtn.setBackground(shaped);
         requestBtn.setOnClickListener(v -> {
             addRequest(lecturerId);
         });
+        layoutParams = new LinearLayout.LayoutParams(
+                0,
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                3.0f
+        );
+        requestBtn.setLayoutParams(layoutParams);
         lecturer.addView(requestBtn);
 
         lecturerList.addView(lecturer);

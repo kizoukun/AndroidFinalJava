@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:text="SIGN OUT"
             android:backgroundTint="#4D9EB8"
+            android:id="@+id/logoutBtn"
             />
     </LinearLayout>
     <LinearLayout

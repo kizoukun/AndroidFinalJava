@@ -38,6 +38,15 @@ public class ListRequestsActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+        TextView logout = findViewById(R.id.logoutBtn);
+        logout.setOnClickListener(v -> {
+            SharedPreferencesManager sharedPreferencesManager = new SharedPreferencesManager(getApplicationContext());
+            sharedPreferencesManager.setIsLoggedIn(false);
+            sharedPreferencesManager.clearUserData();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        });
         getRequests();
     }
 

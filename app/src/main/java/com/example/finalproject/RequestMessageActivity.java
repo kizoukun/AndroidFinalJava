@@ -34,6 +34,15 @@ public class RequestMessageActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+        Button logout = findViewById(R.id.logoutBtn);
+        logout.setOnClickListener(v -> {
+            SharedPreferencesManager sharedPreferencesManager = new SharedPreferencesManager(getApplicationContext());
+            sharedPreferencesManager.setIsLoggedIn(false);
+            sharedPreferencesManager.clearUserData();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        });
         getLecturers();
     }
 

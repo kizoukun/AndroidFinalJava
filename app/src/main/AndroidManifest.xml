@@ -26,7 +26,7 @@
             android:exported="false"/>
         <activity android:name=".ListRequestsActivity"
             android:exported="false"/>
-        <activity android:name=".DemiAiActivity"
+        <activity android:name=".AssistantAiActivity"
             android:exported="false"/>
         <activity
             android:name=".MainActivity"

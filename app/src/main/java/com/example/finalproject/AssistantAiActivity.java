@@ -24,17 +24,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Map;
-import java.util.Objects;
 
-public class DemiAiActivity extends AppCompatActivity {
+public class AssistantAiActivity extends AppCompatActivity {
+    private final String AI_URL = "http://192.168.1.6:3000/ai";
 
-    JSONArray messages = new JSONArray();
+    private String threadId = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_demi_ai);
-        addMessage(false, "Hi there, I'm Demi. How can I help you?");
+        setContentView(R.layout.activity_assistant_ai);
+        addMessage(false, "Hi there, I'm Assistant AI. How can I help you?");
         Button sendBtn = findViewById(R.id.sendBtn);
         sendBtn.setOnClickListener(v -> {
             TextView messageTextView = findViewById(R.id.message);
@@ -44,12 +44,8 @@ public class DemiAiActivity extends AppCompatActivity {
             }
 
             messageTextView.setText("");
-            try {
-                addMessageToDemi(message);
-                getMessageFromDemi();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            addMessage(true, message);
+            getMessageFromAssistant(message);
         });
         Button homeBtn = findViewById(R.id.homeBtn);
         homeBtn.setOnClickListener(v -> {
@@ -89,47 +85,42 @@ public class DemiAiActivity extends AppCompatActivity {
         messageContainer.addView(messageRow);
     }
 
-    public void addMessageToDemi(String message) throws JSONException {
-        JSONObject json = new JSONObject();
-        json.put("role", "user");
-        json.put("content", message);
-        messages.put(json);
-        addMessage(true, message);
-    }
 
-
-    public void getMessageFromDemi() {
+    public void getMessageFromAssistant(String msg) {
         JSONObject json = new JSONObject();
         try {
-            json.put("pesan", messages);
+            json.put("message", msg);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        String url = "https://beautiful-yak-getup.cyclic.app/chat";
+        String url = AI_URL;
+        if(threadId != null) {
+            url = AI_URL + "/" + threadId;
+        }
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        addMessage(false, "Demi is typing...");
+        addMessage(false, "Assistant AI is typing...");
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
             try {
+                System.out.println(response);
                 JSONObject data = new JSONObject(response);
                 JSONArray choices = data.getJSONArray("choices");
+                threadId = data.getString("threadId");
                 JSONObject choice = choices.getJSONObject(0);
-                JSONObject message = choice.getJSONObject("message");
+                String message = choice.getString("content");
                 LinearLayout messageContainer = findViewById(R.id.chatList);
                 int lastIndex = messageContainer.getChildCount() - 1;
                 if (lastIndex >= 0) {
                     messageContainer.removeViewAt(lastIndex);
                 }
-                addMessage(false, message.getString("content"));
+                addMessage(false, message);
                 ScrollView scrollView = findViewById(R.id.scrollView);
                 scrollView.fullScroll(ScrollView.FOCUS_DOWN);
-                messages.put(message);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
         }, error -> {
             Log.e("error", error.toString());
-            messages.remove(messages.length() - 1);
             LinearLayout messageContainer = findViewById(R.id.chatList);
             int lastIndex = messageContainer.getChildCount() - 1;
             if (lastIndex >= 0) {

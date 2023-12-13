@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.widget.Button;
@@ -23,7 +22,7 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String BASE_URL = "http://172.20.10.3/android";
+    public static final String BASE_URL = "http://192.168.1.6/final";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +46,12 @@ public class MainActivity extends AppCompatActivity {
             finish();
         });
 
-//        Button demiAiBtn = findViewById(R.id.demiAiBtn);
-//        demiAiBtn.setOnClickListener(v -> {
-//            Intent intent = new Intent(this, DemiAiActivity.class);
-//            startActivity(intent);
-//            finish();
-//        });
+        Button assistantAiBtn = findViewById(R.id.assistantAiBtn);
+        assistantAiBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(this, AssistantAiActivity.class);
+            startActivity(intent);
+            finish();
+        });
 
         TextView requestMessage = findViewById(R.id.requestMessageBtn);
         if(sharedPreferencesManager.getUserRole() != null && sharedPreferencesManager.getUserRole().equalsIgnoreCase("lecturer")) {

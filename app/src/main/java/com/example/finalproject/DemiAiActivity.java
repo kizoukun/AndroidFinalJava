@@ -105,7 +105,7 @@ public class DemiAiActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        String url = "";
+        String url = "https://beautiful-yak-getup.cyclic.app/chat";
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
         addMessage(false, "Demi is typing...");
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
@@ -129,6 +129,12 @@ public class DemiAiActivity extends AppCompatActivity {
 
         }, error -> {
             Log.e("error", error.toString());
+            messages.remove(messages.length() - 1);
+            LinearLayout messageContainer = findViewById(R.id.chatList);
+            int lastIndex = messageContainer.getChildCount() - 1;
+            if (lastIndex >= 0) {
+                messageContainer.removeViewAt(lastIndex);
+            }
         }) {
 
             public Map<String, String> getHeaders() {

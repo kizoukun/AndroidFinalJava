@@ -30,13 +30,13 @@
             android:backgroundTint="#4D9EB8"
             android:id="@+id/logoutBtn"
         />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Demi AI"
-            android:backgroundTint="#4D9EB8"
-            android:id="@+id/demiAiBtn"
-        />
+<!--        <Button-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Demi AI"-->
+<!--            android:backgroundTint="#4D9EB8"-->
+<!--            android:id="@+id/demiAiBtn"-->
+<!--        />-->
     </LinearLayout>
 
     <LinearLayout
